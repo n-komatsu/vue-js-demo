@@ -10,6 +10,7 @@
 
 <script>
 import _ from 'lodash';
+//marked.js...マークダウンをhtmlにコンパイルしてくれるライブラリ。
 import marked from 'marked';
 
 export default {
@@ -20,10 +21,12 @@ export default {
   },
   computed: {
     compiledMarkdown: function() {
+      //sanitize:trueにすることで入力されたscriptタグをプレーンテキストに変換
       return marked(this.markdown, { sanitize: true });
     }
   },
   methods: {
+    //_.debounce(func, [wait=0], [options={}])はlodashの関数で第一引数で指定した関数を第2引数で指定したミリ秒後に実行する関数
     update: _.debounce(function(e){
       this.markdown = e.target.value;
     }, 300),
